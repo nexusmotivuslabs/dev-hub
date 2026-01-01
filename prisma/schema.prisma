@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      UserRole @default(REGULAR)
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+enum UserRole {
+  REGULAR
+  PAID
+  ADMIN
+}
+
+model ActivePage {
+  id         String    @id @default(uuid())
+  notionId   String    @unique
+  title      String
+  slug       String?
+  category   String?
+  notionUrl  String?
+  active     Boolean   @default(true)
+  selectedAt DateTime  @default(now())
+  lastSynced DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@map("active_pages")
+}
+
