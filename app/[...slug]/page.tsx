@@ -12,15 +12,18 @@ interface PageProps {
 }
 
 async function getMarkdownContent(slug: string[]) {
+  // Decode URL-encoded segments (handles spaces, special characters, etc.)
+  const decodedSlug = slug.map(segment => decodeURIComponent(segment))
+  
   try {
-    const filePath = join(process.cwd(), 'content', ...slug) + '.md'
+    const filePath = join(process.cwd(), 'content', ...decodedSlug) + '.md'
     const fileContents = await readFile(filePath, 'utf8')
     const { data, content } = matter(fileContents)
     return { frontmatter: data, content }
   } catch (error) {
     // Try as directory with README.md
     try {
-      const filePath = join(process.cwd(), 'content', ...slug, 'README.md')
+      const filePath = join(process.cwd(), 'content', ...decodedSlug, 'README.md')
       const fileContents = await readFile(filePath, 'utf8')
       const { data, content } = matter(fileContents)
       return { frontmatter: data, content }
