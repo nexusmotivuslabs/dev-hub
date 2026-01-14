@@ -5,6 +5,11 @@ import matter from 'gray-matter'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
+// Force dynamic rendering for serverless environments (Vercel)
+// This ensures file system operations work correctly at runtime
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+
 interface PageProps {
   params: {
     slug: string[]
