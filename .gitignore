@@ -33,6 +33,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Build artifacts
+.swc/
+
 # Data files (use database in production)
 /data/*.json
 !data/.gitkeep

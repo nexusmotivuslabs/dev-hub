@@ -9,20 +9,7 @@ const notion = new Client({
 })
 
 export async function GET(request: NextRequest) {
-  // Check authentication and admin role
-  const authHeader = request.headers.get('authorization')
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-
-  const token = authHeader.substring(7)
-  const { verifyToken } = await import('@/lib/auth')
-  const decoded = verifyToken(token)
-
-  if (!decoded || decoded.role !== 'admin') {
-    return NextResponse.json({ error: 'Admin access required' }, { status: 403 })
-  }
-
+  // Dev Hub is read-only - public access
   if (!process.env.NOTION_DATABASE_ID) {
     return NextResponse.json(
       { error: 'NOTION_DATABASE_ID not configured' },

@@ -48,20 +48,12 @@ function generateSlug(title: string): string {
 }
 
 export async function POST(request: NextRequest) {
-  const authHeader = request.headers.get('authorization')
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-
-  const token = authHeader.substring(7)
-  const { verifyToken } = await import('@/lib/auth')
-  const decoded = verifyToken(token)
-
-  if (!decoded || decoded.role !== 'admin') {
-    return NextResponse.json({ error: 'Admin access required' }, { status: 403 })
-  }
-
-  try {
+  // Dev Hub is read-only - content import disabled
+  return NextResponse.json(
+    { error: 'Dev Hub is read-only. Content import is not available.' },
+    { status: 403 }
+  )
+}
     // Read active pages
     const activePagesContent = await readFile(ACTIVE_PAGES_FILE, 'utf8')
     const { pages } = JSON.parse(activePagesContent)
