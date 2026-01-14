@@ -2,6 +2,10 @@
   "name": "dev-hub",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "prisma generate && next build",
@@ -16,7 +20,12 @@
     "db:migrate:deploy": "prisma migrate deploy",
     "postinstall": "prisma generate",
     "db:studio": "prisma studio",
-    "db:push": "prisma db push"
+    "db:push": "prisma db push",
+    "build:local": "npm run build",
+    "build:production": "NODE_ENV=production npm run build",
+    "test:build": "npm run build && npm run start & sleep 5 && curl -f http://localhost:3000/api/health && pkill -f 'next start' || true",
+    "vercel:env:pull": "vercel env pull .env.local",
+    "sync:env": "vercel env pull .env.vercel && echo 'Environment variables pulled from Vercel to .env.vercel'"
   },
   "dependencies": {
     "@next/mdx": "^14.0.0",
