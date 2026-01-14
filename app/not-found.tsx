@@ -1,7 +1,5 @@
-'use client'
-
 import Link from 'next/link'
-import { FileQuestion, Home, ArrowLeft } from 'lucide-react'
+import { FileQuestion, Home } from 'lucide-react'
 
 export default function NotFound() {
   return (
@@ -43,7 +41,7 @@ export default function NotFound() {
           </ul>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex justify-center">
           <Link
             href="/"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
@@ -51,14 +49,6 @@ export default function NotFound() {
             <Home className="w-5 h-5" />
             Go to Homepage
           </Link>
-          
-          <button
-            onClick={() => window.history.back()}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition-colors font-medium"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Go Back
-          </button>
         </div>
 
         <div className="mt-8 pt-6 border-t border-gray-200">
