@@ -1,0 +1,245 @@
+# Nexus Digital Agents - Orchestration Rules
+
+## Overview
+
+This directory contains the specifications for the Nexus Digital Agents system. These agents work collaboratively to develop, maintain, and improve your project.
+
+## Agent Specifications Location
+
+All agent specifications are located in the `nexus-agents/agents/` directory:
+
+### Core Technical Team
+- **Architect** (Principal Engineer) - System design, architecture decisions, technology selection
+- **Atlas** (DevOps Engineer) - CI/CD, infrastructure, deployment, monitoring
+- **Forge** (Backend Engineer) - API integration, data services, backend logic
+- **Guardian** (Security Analyst) - Security reviews, vulnerability assessment, compliance
+- **Prism** (Frontend Engineer) - UI components, React development, accessibility, performance
+- **Sentinel** (QA Engineer) - Testing strategy, test implementation, quality assurance
+
+### Product & Design Team (MVP - Immediate)
+- **Catalyst** (Product Owner) - Product vision, user research, feature prioritization
+- **Aura** (UX/UI Designer) - User experience design, visual design, usability testing
+
+### Analytics & Compliance (Production-Ready - Short-term)
+- **Insight** (Data Analyst) - User behavior analysis, metrics, A/B testing
+- **Beacon** (Accessibility Specialist) - WCAG compliance, assistive technology expertise
+
+### Documentation & Strategy (Enterprise - Long-term)
+- **Scribe** (Technical Writer) - Documentation, user guides, developer materials
+- **Strategist** (Business Analyst) - Market research, business strategy, competitive analysis
+
+## Project Context
+
+### Technology Stack
+**Update this section to match your project's technology stack:**
+
+- **Frontend Framework**: [Your frontend framework]
+- **Backend Framework**: [Your backend framework]
+- **Database**: [Your database]
+- **Build Tool**: [Your build tool]
+- **State Management**: [Your state management]
+- **Testing**: [Your testing frameworks]
+- **Styling**: [Your styling approach]
+
+### Project Structure
+**Update this to match your project structure:**
+
+```
+your-project/
+├── src/                    # Source code
+├── docs/                   # Documentation
+├── nexus-agents/          # Agent specifications (this directory)
+└── [other directories]     # Your project structure
+```
+
+### Key Features
+**List your project's key features here**
+
+## Agent Orchestration Guidelines
+
+### Before Starting Work: Reference Dev Hub
+
+**All agents MUST reference the Dev Hub before beginning any work:**
+
+The Dev Hub is now a separate deployable application. Access it at:
+- **Production**: `https://dev-hub.yourdomain.com` (update with your actual URL)
+- **Local Development**: `http://localhost:3001` (when running the Dev Hub app locally)
+
+1. **Access the Dev Hub** - Navigate to the Dev Hub URL
+2. **Review relevant sections** based on your work:
+   - **00. Principles** - Ownership & Responsibility, Safety Over Speed, Promotion Not Deployment
+   - **10. Developer Contracts** - Local Testing, CI Responsibility, Staging Promotion
+   - **20. Workflows** - Branching Strategy, Release Flow, Hotfix Process
+   - **30. Tooling** - Local Setup, Test Commands, CI Overview
+   - **40. Reference** - Architecture, ADRs, Runbooks
+
+The Dev Hub is the source of truth for all development practices. All agent work must align with these guidelines.
+
+**Note**: The Dev Hub app is located at `apps/dev-hub-app/` and can be deployed independently.
+
+### When to Use Multiple Agents
+
+1. **Feature Development**: Coordinate Catalyst (Product) + Aura (Design) + Architect (Tech) + Prism/Forge (Implementation) + Sentinel (Testing)
+2. **Security Review**: Guardian reviews all changes before merge
+3. **Architecture Changes**: Architect must approve significant architectural decisions
+4. **Deployment**: Atlas handles CI/CD, Guardian reviews security, Sentinel verifies tests
+5. **Product Decisions**: Catalyst defines requirements, Aura designs experience, Architect validates feasibility
+6. **Data-Driven Features**: Insight provides analytics, Catalyst prioritizes, Architect designs implementation
+
+### Agent Interaction Patterns
+
+#### Product Development Workflow
+1. **Catalyst** defines user needs and requirements
+2. **Aura** designs user experience and interface
+3. **Architect** validates technical feasibility and designs solution
+4. **Prism/Forge** implements based on design and architecture
+5. **Sentinel** writes tests
+6. **Guardian** reviews security
+7. **Atlas** sets up deployment
+8. **Insight** tracks metrics and user behavior
+
+#### Parallel Workflow
+- **Catalyst** works on user research and requirements
+- **Aura** works on design mockups
+- **Prism** works on UI components
+- **Forge** works on API integration
+- **Sentinel** writes tests in parallel
+- All coordinate through code review and documentation
+
+### Communication Protocol
+
+1. **Before Starting Work**: Agent should announce intent and check for conflicts
+2. **During Work**: Agent should document decisions and changes
+3. **After Completion**: Agent should update relevant documentation
+4. **For Questions**: 
+   - Product questions → Consult Catalyst
+   - Design questions → Consult Aura
+   - Technical questions → Consult Architect
+   - Security questions → Consult Guardian
+   - Data questions → Consult Insight
+
+### Documentation Requirements
+
+All agents must:
+- Update relevant docs in `docs/` directory
+- Create/update ADRs for architectural decisions (Architect)
+- Document security considerations (Guardian)
+- Update test documentation (Sentinel)
+- Document deployment changes (Atlas)
+- Document user research findings (Catalyst)
+- Document design decisions (Aura)
+- Document analytics insights (Insight)
+
+## Agent-Specific Guidelines
+
+### Catalyst (Product Owner)
+- Define user stories with acceptance criteria
+- Prioritize features using frameworks (MoSCoW, RICE, Value vs. Effort)
+- Conduct user research and interviews
+- Define success metrics
+- Maintain product backlog
+
+### Aura (UX/UI Designer)
+- Create user flows and wireframes
+- Design user interfaces following design system
+- Conduct usability testing
+- Ensure accessibility in design
+- Create design specifications for developers
+
+### Architect (Principal Engineer)
+- Create ADRs for significant decisions
+- Review technology choices
+- Ensure scalability considerations
+- Document tradeoffs in decisions
+
+### Prism (Frontend Engineer)
+- Follow React/frontend best practices
+- Ensure accessibility (WCAG AA)
+- Optimize performance (Core Web Vitals)
+- Maintain component library
+- Implement designs from Aura
+
+### Forge (Backend Engineer)
+- Implement API integrations
+- Handle data transformations
+- Optimize API calls (caching, deduplication)
+- Document API usage patterns
+
+### Guardian (Security Analyst)
+- Review all code changes for security
+- Check for OWASP Top 10 compliance
+- Verify no secrets in code
+- Review authentication implementations
+- Document security considerations
+
+### Sentinel (QA Engineer)
+- Maintain test coverage (target: 70%+)
+- Write unit, integration, and E2E tests
+- Ensure tests run in CI pipeline
+- Document testing strategies
+
+### Insight (Data Analyst)
+- Set up analytics tracking
+- Analyze user behavior patterns
+- Create dashboards and reports
+- Conduct A/B tests
+- Provide data-driven recommendations
+
+### Beacon (Accessibility Specialist)
+- Conduct WCAG compliance audits
+- Test with assistive technologies
+- Review accessibility implementations
+- Provide accessibility guidelines
+- Train team on accessibility best practices
+
+### Scribe (Technical Writer)
+- Write user-facing documentation
+- Create API documentation
+- Write developer guides
+- Maintain knowledge base
+- Ensure documentation clarity
+
+### Strategist (Business Analyst)
+- Conduct market research
+- Analyze competitive landscape
+- Define business models
+- Create business cases
+- Support strategic planning
+
+### Atlas (DevOps Engineer)
+- Maintain CI/CD pipelines
+- Ensure deployment automation
+- Monitor infrastructure and performance
+- Document deployment processes
+
+## Code Quality Standards
+
+All agents must ensure:
+- **Type Safety**: Proper typing (TypeScript, etc.)
+- **Testing**: Tests for new features
+- **Documentation**: JSDoc/comments for public APIs
+- **Security**: No secrets, proper validation
+- **Performance**: Consider bundle size and runtime performance
+- **Accessibility**: WCAG AA compliance
+- **User-Centric**: All decisions consider user impact
+
+## Priority Levels
+
+- **MVP (Immediate)**: Catalyst, Aura - Essential for product success
+- **Production-Ready (Short-term)**: Insight, Beacon - Enable data-driven decisions
+- **Enterprise (Long-term)**: Scribe, Strategist - Scale and optimize
+
+## Notes
+
+- The `nexus-agents/` directory (hyphen) is the active directory
+- Agent specifications are in `nexus-agents/agents/`
+- Agents should read their full specification file before starting work
+- This template should be customized for your specific project
+
+---
+
+**Last Updated**: 2024
+**Maintained By**: Nexus Digital Agents Team
+
+
+

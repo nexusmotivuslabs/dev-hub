@@ -2,48 +2,8 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">Developer Hub</h1>
-        <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8">
-          Centralized knowledge base for all development teams working on the Master Money System.
-        </p>
-      </div>
-
-      <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8">
-        <div className="prose prose-sm sm:prose-base lg:prose-lg max-w-none">
-          <h2>Structure</h2>
-          <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto">
-{`Dev Hub
-├── 00. Principles
-│   ├── Ownership & Responsibility
-│   ├── Safety Over Speed
-│   └── Promotion, Not Deployment
-│
-├── 10. Developer Contracts
-│   ├── Local Testing Contract
-│   ├── CI Responsibility Contract
-│   └── Staging Promotion Contract
-│
-├── 20. Workflows
-│   ├── Branching Strategy
-│   ├── Release Flow
-│   └── Hotfix Process
-│
-├── 30. Tooling
-│   ├── Local Setup
-│   ├── Test Commands
-│   └── CI Overview
-│
-└── 40. Reference
-    ├── Architecture
-    ├── ADRs
-    └── Runbooks`}
-          </pre>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+    <div className="w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 w-full">
         <SectionCard
           title="00. Principles"
           description="Core development principles and values"
@@ -127,7 +87,7 @@ function SectionCard({
 }) {
   return (
     <Link href={href}>
-      <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 hover:shadow-md transition-shadow cursor-pointer h-full">
+      <div className="bg-white rounded-lg shadow-sm p-6 lg:p-8 hover:shadow-md transition-shadow cursor-pointer h-full min-h-[200px] flex flex-col">
         <h2 className="text-xl sm:text-2xl font-semibold mb-2">{title}</h2>
         <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">{description}</p>
         <ul className="space-y-1.5 sm:space-y-2">

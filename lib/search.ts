@@ -58,9 +58,123 @@ export const searchItems: SearchItem[] = [
     category: 'API Integration',
   },
   {
-    title: 'Java + React Patterns',
-    path: '/domains/api-integration/java-react-patterns',
-    content: 'Common patterns for integrating Java Spring Boot backend with React frontend. REST APIs, authentication, error handling',
+    title: 'Backend API Integration',
+    path: '/domains/api-integration/backend',
+    content: 'Backend API integration patterns, best practices, and implementation guides for Java Spring Boot',
+    category: 'API Integration',
+  },
+  {
+    title: 'Java Backend API Integration',
+    path: '/domains/api-integration/backend/java',
+    content: 'Java Spring Boot backend API integration patterns and examples. REST APIs, authentication, error handling',
+    category: 'API Integration',
+  },
+  {
+    title: 'Java Overview',
+    path: '/domains/api-integration/backend/java/overview',
+    content: 'Java releases, version status, best practices, var keyword, JUnit, Mockito, testing tools',
+    category: 'API Integration',
+  },
+  {
+    title: 'Testing in Java',
+    path: '/domains/api-integration/backend/java/testing',
+    content: 'Java testing with JUnit 5, Mockito, AssertJ. Testing patterns, best practices, integration testing',
+    category: 'API Integration',
+  },
+  {
+    title: 'REST APIs in Java',
+    path: '/domains/api-integration/backend/java/rest',
+    content: 'REST API implementation patterns using Java Spring Boot. GET, POST, PUT, DELETE operations',
+    category: 'API Integration',
+  },
+  {
+    title: 'Authentication in Java',
+    path: '/domains/api-integration/backend/java/authentication',
+    content: 'Authentication patterns and implementations for Java Spring Boot backends. JWT, OAuth2, sessions',
+    category: 'API Integration',
+  },
+  {
+    title: 'JWT Authentication in Java',
+    path: '/domains/api-integration/backend/java/authentication/jwt',
+    content: 'JSON Web Token (JWT) authentication implementation for Java Spring Boot',
+    category: 'API Integration',
+  },
+  {
+    title: 'OAuth2 in Java',
+    path: '/domains/api-integration/backend/java/authentication/oauth2',
+    content: 'OAuth2 authentication implementation for Java Spring Boot',
+    category: 'API Integration',
+  },
+  {
+    title: 'Session Management in Java',
+    path: '/domains/api-integration/backend/java/authentication/sessions',
+    content: 'Session-based authentication for Java Spring Boot',
+    category: 'API Integration',
+  },
+  {
+    title: 'Error Handling in Java',
+    path: '/domains/api-integration/backend/java/error-handling',
+    content: 'Error handling patterns and best practices for Java Spring Boot APIs',
+    category: 'API Integration',
+  },
+  {
+    title: 'Data Transformation in Java',
+    path: '/domains/api-integration/backend/java/data-transformation',
+    content: 'Data transformation patterns for Java Spring Boot APIs',
+    category: 'API Integration',
+  },
+  {
+    title: 'Frontend API Integration',
+    path: '/domains/api-integration/frontend',
+    content: 'Frontend API integration patterns, best practices, and implementation guides for React',
+    category: 'API Integration',
+  },
+  {
+    title: 'React Frontend API Integration',
+    path: '/domains/api-integration/frontend/react',
+    content: 'React frontend API integration patterns and examples. REST APIs, authentication, error handling',
+    category: 'API Integration',
+  },
+  {
+    title: 'REST APIs in React',
+    path: '/domains/api-integration/frontend/react/rest',
+    content: 'REST API integration patterns using React and TypeScript. GET, POST, PUT, DELETE operations',
+    category: 'API Integration',
+  },
+  {
+    title: 'Authentication in React',
+    path: '/domains/api-integration/frontend/react/authentication',
+    content: 'Authentication patterns and implementations for React frontends. JWT, OAuth2, sessions',
+    category: 'API Integration',
+  },
+  {
+    title: 'JWT Authentication in React',
+    path: '/domains/api-integration/frontend/react/authentication/jwt',
+    content: 'JSON Web Token (JWT) authentication implementation for React applications',
+    category: 'API Integration',
+  },
+  {
+    title: 'OAuth2 in React',
+    path: '/domains/api-integration/frontend/react/authentication/oauth2',
+    content: 'OAuth2 authentication implementation for React applications',
+    category: 'API Integration',
+  },
+  {
+    title: 'Session Management in React',
+    path: '/domains/api-integration/frontend/react/authentication/sessions',
+    content: 'Session-based authentication for React applications',
+    category: 'API Integration',
+  },
+  {
+    title: 'Error Handling in React',
+    path: '/domains/api-integration/frontend/react/error-handling',
+    content: 'Error handling patterns and best practices for React API calls',
+    category: 'API Integration',
+  },
+  {
+    title: 'Data Transformation in React',
+    path: '/domains/api-integration/frontend/react/data-transformation',
+    content: 'Data transformation patterns for React frontends',
     category: 'API Integration',
   },
   {
@@ -141,21 +255,48 @@ export const searchItems: SearchItem[] = [
     content: 'Deployment strategies and practices. CI/CD, infrastructure as code',
     category: 'Platform Engineering',
   },
+  {
+    title: 'Nexus Digital Agents',
+    path: '/domains/nexus-agents',
+    content: 'Nexus Digital Agents system for collaborative development. Product Owner, Architect, Frontend, Backend, QA, Security, DevOps',
+    category: 'Team',
+  },
+  {
+    title: 'Sprint 001: Dev Hub Improvements',
+    path: '/domains/nexus-agents/sprints/SPRINT_001_DEV_HUB_IMPROVEMENTS',
+    content: 'Sprint plan for improving Developer Hub. Led by Catalyst Product Owner. User experience, performance, accessibility improvements',
+    category: 'Sprints',
+  },
+  {
+    title: 'Sprint 001 Kickoff',
+    path: '/domains/nexus-agents/sprints/SPRINT_KICKOFF',
+    content: 'Sprint kickoff for Developer Hub improvements. Catalyst Product Owner leading the team. Mission, priorities, team assignments',
+    category: 'Sprints',
+  },
+  {
+    title: 'Catalyst - Product Owner',
+    path: '/domains/nexus-agents/agents/Agent — Catalyst (Product Owner)',
+    content: 'Catalyst Product Owner agent. Product vision, user research, feature prioritization, user stories, backlog management',
+    category: 'Agents',
+  },
 ]
 
-// Configure Fuse.js for optimal search
+// Configure Fuse.js for optimal search performance
 const fuseOptions = {
   keys: [
-    { name: 'title', weight: 0.4 },
+    { name: 'title', weight: 0.5 }, // Increased weight for title matches
     { name: 'content', weight: 0.3 },
-    { name: 'category', weight: 0.2 },
-    { name: 'path', weight: 0.1 },
+    { name: 'category', weight: 0.15 },
+    { name: 'path', weight: 0.05 },
   ],
   threshold: 0.3, // Lower = more strict, higher = more fuzzy
   includeScore: true,
   minMatchCharLength: 2,
   ignoreLocation: true,
   findAllMatches: true,
+  // Performance optimizations
+  useExtendedSearch: false, // Disable for better performance
+  shouldSort: true,
 }
 
 let fuseInstance: Fuse<SearchItem> | null = null

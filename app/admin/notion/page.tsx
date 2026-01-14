@@ -1,5 +1,8 @@
 'use client'
 
+// Make this route dynamic to avoid build-time issues
+export const dynamic = 'force-dynamic'
+
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -81,7 +84,7 @@ export default function NotionAdminPage() {
         setActivePages(activeData.pages || [])
 
         // Pre-select active pages
-        const activeIds = new Set(
+        const activeIds = new Set<string>(
           activeData.pages
             .filter((p: ActivePage) => p.active)
             .map((p: ActivePage) => p.id)

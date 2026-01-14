@@ -1,16 +1,17 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Navigation } from '@/components/Navigation'
+import { NavigationWrapper } from '@/components/NavigationWrapper'
 import { Footer } from '@/components/Footer'
-import { Sidebar } from '@/components/Sidebar'
-import { AuthProvider } from '@/contexts/AuthContext'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { AccessibilitySkipLink } from '@/components/AccessibilitySkipLink'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Developer Hub - Life World OS',
-  description: 'Centralized knowledge base for all development teams',
+  title: 'Developer Hub - Nexus Technologies',
+  description: 'Centralized knowledge base for Nexus development teams - Java, React, AWS, and more',
 }
 
 export default function RootLayout({
@@ -21,18 +22,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthProvider>
+        <ErrorBoundary>
+          <AccessibilitySkipLink />
           <div className="min-h-screen bg-gray-50 flex flex-col">
-            <Navigation />
+            <NavigationWrapper />
             <div className="flex flex-1">
-              <Sidebar />
-              <main className="flex-1 px-3 sm:px-4 py-6 sm:py-8 lg:ml-64 max-w-4xl mx-auto w-full">
-                {children}
+              <main id="main-content" className="flex-1 w-full lg:ml-64 min-w-0" tabIndex={-1}>
+                <div className="w-full px-3 sm:px-4 lg:px-6 xl:px-8 py-2 sm:py-4 lg:py-6">
+                  <Breadcrumbs />
+                  {children}
+                </div>
               </main>
             </div>
             <Footer />
           </div>
-        </AuthProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )

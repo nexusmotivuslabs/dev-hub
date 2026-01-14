@@ -122,8 +122,10 @@ export function SearchModal({ isOpen: externalIsOpen, onClose }: SearchModalProp
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Search..."
-              className="flex-1 outline-none text-gray-900 placeholder-gray-400 text-sm sm:text-base"
+              placeholder="Search documentation..."
+              className="flex-1 outline-none text-gray-900 placeholder-gray-400 text-sm sm:text-base focus:ring-2 focus:ring-blue-500 rounded"
+              aria-label="Search documentation"
+              aria-describedby="search-hint"
             />
             <button
               onClick={handleClose}

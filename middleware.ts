@@ -2,29 +2,25 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  // Admin routes protection
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    // Check for token in Authorization header or cookie
-    const authHeader = request.headers.get('authorization')
-    const token = authHeader?.startsWith('Bearer ')
-      ? authHeader.substring(7)
-      : request.cookies.get('auth_token')?.value
+  const response = NextResponse.next()
 
-    if (!token) {
-      // Redirect to login if no token
-      const loginUrl = new URL('/login', request.url)
-      loginUrl.searchParams.set('redirect', request.nextUrl.pathname)
-      return NextResponse.redirect(loginUrl)
-    }
+  // Security headers
+  response.headers.set('X-DNS-Prefetch-Control', 'on')
+  response.headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload')
+  response.headers.set('X-Frame-Options', 'SAMEORIGIN')
+  response.headers.set('X-Content-Type-Options', 'nosniff')
+  response.headers.set('X-XSS-Protection', '1; mode=block')
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
 
-    // Token verification will happen in the page component
-    // since we need to check the user role from the token
-  }
+  // Dev Hub is read-only - no authentication required
+  // All routes are publicly accessible
 
-  return NextResponse.next()
+  return response
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
 }
-

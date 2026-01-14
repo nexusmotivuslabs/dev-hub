@@ -4,16 +4,24 @@ Centralized knowledge base for development teams working on the Master Money Sys
 
 ## 🚀 Quick Start
 
-### Development
+### Prerequisites
 
-1. **Install dependencies**
+- **Node.js**: 18.x or higher
+- **npm**: 9.x or higher
+- **PostgreSQL**: 15.x or higher (or Docker)
+
+### Development Setup
+
+1. **Clone and install**
    ```bash
+   git clone <repository-url>
+   cd dev-hub
    npm install
    ```
 
 2. **Set up database**
 
-   **Option A: Docker PostgreSQL (Recommended)**
+   **Option A: Docker PostgreSQL (Recommended for local dev)**
    ```bash
    docker run -d \
      --name dev-hub-postgres \
@@ -28,22 +36,24 @@ Centralized knowledge base for development teams working on the Master Money Sys
    createdb devhub
    ```
 
-3. **Set environment variables**
+3. **Configure environment**
 
-   Create `.env.local`:
-   ```env
-   DATABASE_URL=postgresql://postgres:password@localhost:5432/devhub
-   JWT_SECRET=dev-secret-change-in-production-min-32-chars-required
-   NODE_ENV=development
-   
-   # Optional: Notion integration
-   NOTION_API_KEY=your_notion_api_key
-   NOTION_DATABASE_ID=your_notion_database_id
+   Copy `.env.example` to `.env.local`:
+   ```bash
+   cp .env.example .env.local
    ```
 
-4. **Run database migrations**
+   Edit `.env.local` and set:
+   - `DATABASE_URL` - Your PostgreSQL connection string
+   - `JWT_SECRET` - Generate with: `openssl rand -base64 32`
+   - `NODE_ENV=development`
+
+4. **Initialize database**
    ```bash
+   # Generate Prisma Client
    npm run db:generate
+   
+   # Run migrations
    npm run db:migrate
    ```
 
@@ -52,7 +62,18 @@ Centralized knowledge base for development teams working on the Master Money Sys
    npm run dev
    ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the app.
+   Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+### Common Issues
+
+**Issue**: `PrismaClientConstructorValidationError` during build
+- **Solution**: Ensure `DATABASE_URL` is set in `.env.local` (even a dummy URL works for build)
+
+**Issue**: Database connection errors
+- **Solution**: Verify PostgreSQL is running and `DATABASE_URL` is correct
+
+**Issue**: Port 3000 already in use
+- **Solution**: Change port in `package.json` or kill the process using port 3000
 
 ### Production Build
 

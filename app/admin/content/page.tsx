@@ -1,5 +1,8 @@
 'use client'
 
+// Make this route dynamic to avoid build-time issues
+export const dynamic = 'force-dynamic'
+
 import { useAuth } from '@/contexts/AuthContext'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'

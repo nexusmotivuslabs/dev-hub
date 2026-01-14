@@ -66,9 +66,146 @@ const contentTree: TreeNode[] = [
             type: 'file',
           },
           {
-            name: 'Java + React Patterns',
-            path: '/domains/api-integration/java-react-patterns',
-            type: 'file',
+            name: 'Backend',
+            path: '/domains/api-integration/backend',
+            type: 'directory',
+            children: [
+              {
+                name: 'Overview',
+                path: '/domains/api-integration/backend',
+                type: 'file',
+              },
+              {
+                name: 'Java',
+                path: '/domains/api-integration/backend/java',
+                type: 'directory',
+                children: [
+                  {
+                    name: 'Overview',
+                    path: '/domains/api-integration/backend/java',
+                    type: 'file',
+                  },
+                  {
+                    name: 'Java Overview',
+                    path: '/domains/api-integration/backend/java/overview',
+                    type: 'file',
+                  },
+                  {
+                    name: 'REST APIs',
+                    path: '/domains/api-integration/backend/java/rest',
+                    type: 'file',
+                  },
+                  {
+                    name: 'Authentication',
+                    path: '/domains/api-integration/backend/java/authentication',
+                    type: 'directory',
+                    children: [
+                      {
+                        name: 'Overview',
+                        path: '/domains/api-integration/backend/java/authentication',
+                        type: 'file',
+                      },
+                      {
+                        name: 'JWT',
+                        path: '/domains/api-integration/backend/java/authentication/jwt',
+                        type: 'file',
+                      },
+                      {
+                        name: 'OAuth2',
+                        path: '/domains/api-integration/backend/java/authentication/oauth2',
+                        type: 'file',
+                      },
+                      {
+                        name: 'Sessions',
+                        path: '/domains/api-integration/backend/java/authentication/sessions',
+                        type: 'file',
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Error Handling',
+                    path: '/domains/api-integration/backend/java/error-handling',
+                    type: 'file',
+                  },
+                  {
+                    name: 'Data Transformation',
+                    path: '/domains/api-integration/backend/java/data-transformation',
+                    type: 'file',
+                  },
+                  {
+                    name: 'Testing',
+                    path: '/domains/api-integration/backend/java/testing',
+                    type: 'file',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: 'Frontend',
+            path: '/domains/api-integration/frontend',
+            type: 'directory',
+            children: [
+              {
+                name: 'Overview',
+                path: '/domains/api-integration/frontend',
+                type: 'file',
+              },
+              {
+                name: 'React',
+                path: '/domains/api-integration/frontend/react',
+                type: 'directory',
+                children: [
+                  {
+                    name: 'Overview',
+                    path: '/domains/api-integration/frontend/react',
+                    type: 'file',
+                  },
+                  {
+                    name: 'REST APIs',
+                    path: '/domains/api-integration/frontend/react/rest',
+                    type: 'file',
+                  },
+                  {
+                    name: 'Authentication',
+                    path: '/domains/api-integration/frontend/react/authentication',
+                    type: 'directory',
+                    children: [
+                      {
+                        name: 'Overview',
+                        path: '/domains/api-integration/frontend/react/authentication',
+                        type: 'file',
+                      },
+                      {
+                        name: 'JWT',
+                        path: '/domains/api-integration/frontend/react/authentication/jwt',
+                        type: 'file',
+                      },
+                      {
+                        name: 'OAuth2',
+                        path: '/domains/api-integration/frontend/react/authentication/oauth2',
+                        type: 'file',
+                      },
+                      {
+                        name: 'Sessions',
+                        path: '/domains/api-integration/frontend/react/authentication/sessions',
+                        type: 'file',
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Error Handling',
+                    path: '/domains/api-integration/frontend/react/error-handling',
+                    type: 'file',
+                  },
+                  {
+                    name: 'Data Transformation',
+                    path: '/domains/api-integration/frontend/react/data-transformation',
+                    type: 'file',
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
@@ -148,6 +285,75 @@ const contentTree: TreeNode[] = [
           },
         ],
       },
+      {
+        name: 'Nexus Agents',
+        path: '/domains/nexus-agents',
+        type: 'directory',
+        children: [
+          {
+            name: 'Overview',
+            path: '/domains/nexus-agents',
+            type: 'file',
+          },
+          {
+            name: 'Sprint 001',
+            path: '/domains/nexus-agents/sprints/SPRINT_001_DEV_HUB_IMPROVEMENTS',
+            type: 'file',
+          },
+          {
+            name: 'Sprint Kickoff',
+            path: '/domains/nexus-agents/sprints/SPRINT_KICKOFF',
+            type: 'file',
+          },
+          {
+            name: 'Agents',
+            path: '/domains/nexus-agents/agents',
+            type: 'directory',
+            children: [
+              {
+                name: 'Catalyst (PO)',
+                path: '/domains/nexus-agents/agents/Agent — Catalyst (Product Owner)',
+                type: 'file',
+              },
+              {
+                name: 'Architect',
+                path: '/domains/nexus-agents/agents/Agent — Architect (Principal Engineer)',
+                type: 'file',
+              },
+              {
+                name: 'Prism (Frontend)',
+                path: '/domains/nexus-agents/agents/Agent — Prism (Frontend Engineer)',
+                type: 'file',
+              },
+              {
+                name: 'Forge (Backend)',
+                path: '/domains/nexus-agents/agents/Agent — Forge (Backend Engineer)',
+                type: 'file',
+              },
+              {
+                name: 'Sentinel (QA)',
+                path: '/domains/nexus-agents/agents/Agent — Sentinel (QA Engineer)',
+                type: 'file',
+              },
+              {
+                name: 'Guardian (Security)',
+                path: '/domains/nexus-agents/agents/Agent — Guardian (Security Analyst)',
+                type: 'file',
+              },
+              {
+                name: 'Atlas (DevOps)',
+                path: '/domains/nexus-agents/agents/Agent — Atlas (DevOps Engineer)',
+                type: 'file',
+              },
+              {
+                name: 'Aura (UX/UI)',
+                path: '/domains/nexus-agents/agents/Agent — Aura (UX-UI Designer)',
+                type: 'file',
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 ]
@@ -168,22 +374,28 @@ function TreeNodeComponent({
   onLinkClick?: () => void
 }) {
   const isExpanded = expandedPaths.has(node.path)
+  // Only highlight exact path match, not parent directories
   const isActive = currentPath === node.path
   const hasChildren = node.children && node.children.length > 0
   const indent = level * 16
 
+  // Enhanced active state styling - only for exact matches
+  const activeStyles = isActive 
+    ? 'bg-blue-50 text-blue-700 font-semibold border-l-2 border-blue-600' 
+    : 'text-gray-700 hover:bg-gray-50'
+
   return (
     <div>
-      <div
-        className={`flex items-center py-1.5 px-2 rounded-md hover:bg-gray-100 transition-colors ${
-          isActive ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700'
-        }`}
-        style={{ paddingLeft: `${indent + 8}px` }}
-      >
+        <div
+          className={`flex items-center py-1.5 px-2 rounded-md transition-colors ${activeStyles}`}
+          style={{ paddingLeft: `${indent + 8}px` }}
+        >
         {hasChildren ? (
           <button
             onClick={() => toggleExpand(node.path)}
-            className="mr-1.5 flex items-center justify-center w-4 h-4 hover:bg-gray-200 rounded"
+            className="mr-1.5 flex items-center justify-center w-4 h-4 hover:bg-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+            aria-label={isExpanded ? `Collapse ${node.name}` : `Expand ${node.name}`}
+            aria-expanded={isExpanded}
           >
             {isExpanded ? (
               <ChevronDown className="w-3 h-3" />
@@ -192,23 +404,26 @@ function TreeNodeComponent({
             )}
           </button>
         ) : (
-          <span className="w-4 h-4 mr-1.5" />
+          <span className="w-4 h-4 mr-1.5" aria-hidden="true" />
         )}
         
         {hasChildren ? (
           isExpanded ? (
-            <FolderOpen className="w-4 h-4 mr-1.5 text-gray-500" />
+            <FolderOpen className="w-4 h-4 mr-1.5 text-gray-500" aria-hidden="true" />
           ) : (
-            <Folder className="w-4 h-4 mr-1.5 text-gray-500" />
+            <Folder className="w-4 h-4 mr-1.5 text-gray-500" aria-hidden="true" />
           )
         ) : (
-          <FileText className="w-4 h-4 mr-1.5 text-gray-400" />
+          <FileText className="w-4 h-4 mr-1.5 text-gray-400" aria-hidden="true" />
         )}
         
         <Link
           href={node.path}
           onClick={onLinkClick}
-          className="flex-1 text-sm hover:text-blue-600 transition-colors truncate"
+          className={`flex-1 text-sm transition-colors truncate focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded ${
+            isActive ? 'text-blue-700 font-semibold' : 'hover:text-blue-600'
+          }`}
+          aria-current={isActive ? 'page' : undefined}
         >
           {node.name}
         </Link>
@@ -233,10 +448,14 @@ function TreeNodeComponent({
   )
 }
 
-export function Sidebar() {
+export function Sidebar({ isOpen, onClose }: { isOpen?: boolean; onClose?: () => void }) {
   const pathname = usePathname()
   const [expandedPaths, setExpandedPaths] = useState<Set<string>>(new Set())
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  
+  // Use external isOpen prop if provided, otherwise use internal state
+  const sidebarOpen = isOpen !== undefined ? isOpen : isMobileOpen
+  const handleClose = onClose || (() => setIsMobileOpen(false))
 
   // Auto-expand paths that contain the current path
   useEffect(() => {
@@ -276,13 +495,18 @@ export function Sidebar() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed lg:sticky top-16 left-0 h-[calc(100vh-4rem)] 
+          fixed lg:fixed 
+          top-12 sm:top-14 lg:top-16 
+          left-0 
+          h-[calc(100vh-3rem)] sm:h-[calc(100vh-3.5rem)] lg:h-[calc(100vh-4rem)]
           w-64 bg-white border-r border-gray-200 
           overflow-y-auto z-30
           transition-transform duration-300 ease-in-out
-          ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
           shadow-lg lg:shadow-none
         `}
+        aria-label="Navigation sidebar"
+        role="navigation"
       >
         <div className="p-3 sm:p-4">
           <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
@@ -300,7 +524,7 @@ export function Sidebar() {
                 onLinkClick={() => {
                   // Close sidebar on mobile when link is clicked
                   if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-                    setIsMobileOpen(false)
+                    handleClose()
                   }
                 }}
               />
@@ -310,10 +534,10 @@ export function Sidebar() {
       </aside>
 
       {/* Overlay for mobile */}
-      {isMobileOpen && (
+      {sidebarOpen && (
         <div
           className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-20"
-          onClick={() => setIsMobileOpen(false)}
+          onClick={handleClose}
           aria-label="Close sidebar"
         />
       )}

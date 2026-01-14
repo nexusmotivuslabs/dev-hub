@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+// Make this route dynamic to avoid build-time Prisma initialization
+export const dynamic = 'force-dynamic'
+
 interface ActivePage {
   id: string
   title: string

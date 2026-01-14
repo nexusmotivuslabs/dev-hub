@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+
+// Make this route dynamic to avoid build-time Prisma initialization
+export const dynamic = 'force-dynamic'
 import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
 import { readFile, writeFile, mkdir } from 'fs/promises'

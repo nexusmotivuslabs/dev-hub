@@ -6,23 +6,33 @@
   body {
     @apply text-gray-900;
   }
+  
+  /* Responsive typography */
+  html {
+    @apply text-base sm:text-base lg:text-base;
+  }
+  
+  /* Ensure proper scrolling on mobile */
+  body {
+    @apply overflow-x-hidden;
+  }
 }
 
 @layer components {
   .prose {
-    @apply max-w-none;
+    @apply max-w-none w-full;
   }
   
   .prose h1 {
-    @apply text-4xl font-bold mb-6 mt-8;
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 mt-6 sm:mt-8;
   }
   
   .prose h2 {
-    @apply text-3xl font-semibold mb-4 mt-6;
+    @apply text-xl sm:text-2xl lg:text-3xl font-semibold mb-3 sm:mb-4 mt-4 sm:mt-6;
   }
   
   .prose h3 {
-    @apply text-2xl font-semibold mb-3 mt-4;
+    @apply text-lg sm:text-xl lg:text-2xl font-semibold mb-2 sm:mb-3 mt-3 sm:mt-4;
   }
   
   .prose p {
@@ -38,23 +48,59 @@
   }
   
   .prose code {
-    @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+    @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-800;
   }
   
   .prose pre {
     @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4;
+    @apply border border-gray-800;
   }
   
   .prose pre code {
-    @apply bg-transparent p-0;
+    @apply bg-transparent p-0 text-gray-100;
   }
   
   .prose a {
     @apply text-blue-600 hover:text-blue-800 underline;
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded;
   }
   
   .prose blockquote {
-    @apply border-l-4 border-gray-300 pl-4 italic my-4;
+    @apply border-l-4 border-gray-300 pl-4 italic my-4 bg-gray-50 py-2;
+  }
+  
+  .prose table {
+    @apply w-full border-collapse border border-gray-300 my-4;
+  }
+  
+  .prose th {
+    @apply bg-gray-100 border border-gray-300 px-4 py-2 text-left font-semibold;
+  }
+  
+  .prose td {
+    @apply border border-gray-300 px-4 py-2;
+  }
+  
+  .prose img {
+    @apply rounded-lg shadow-sm my-4 max-w-full h-auto;
+  }
+  
+  .prose strong {
+    @apply font-semibold text-gray-900;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    @apply scroll-mt-4;
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
 

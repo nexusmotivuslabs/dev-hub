@@ -1,15 +1,34 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Search, Menu, X } from 'lucide-react'
-import { useAuth } from '@/contexts/AuthContext'
 import { SearchModal } from './SearchModal'
 
-export function Navigation() {
-  const { user, logout, isAdmin, isPaid } = useAuth()
+export function Navigation({ 
+  onSidebarToggle, 
+  sidebarOpen = false 
+}: { 
+  onSidebarToggle?: () => void
+  sidebarOpen?: boolean
+}) {
+  const pathname = usePathname()
   const [showSearch, setShowSearch] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  // Keyboard shortcut for search (Cmd/Ctrl + K)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        setShowSearch(true)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -23,99 +42,78 @@ export function Navigation() {
 
   return (
     <>
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="text-xl font-bold text-gray-900">
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 w-full">
+        <div className="w-full max-w-none px-3 sm:px-4 lg:px-6 xl:px-8">
+          <div className="flex items-center justify-between h-12 sm:h-14 lg:h-16">
+            <Link href="/" className="text-lg sm:text-xl font-bold text-gray-900 flex-shrink-0">
               Developer Hub
             </Link>
             
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-6">
-              {/* Search Button */}
+            {/* Sidebar Toggle Button - Mobile */}
+            {onSidebarToggle && (
               <button
-                onClick={() => setShowSearch(true)}
-                className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
-                title="Search (⌘K)"
+                onClick={onSidebarToggle}
+                className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2"
+                aria-label="Toggle sidebar"
+                aria-expanded={sidebarOpen}
               >
-                <Search className="w-4 h-4" />
-                <span>Search</span>
-                <kbd className="inline-flex items-center gap-1 px-1.5 py-0.5 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded">
-                  <span className="text-[10px]">⌘</span>K
-                </kbd>
+                {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
-
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              
-              {/* Blog - Only for paid users */}
-              {isPaid && (
-                <Link href="/blog" className="text-gray-600 hover:text-gray-900">
-                  Blog
-                </Link>
-              )}
-
-              {/* Admin - Only for admins */}
-              {isAdmin && (
-                <Link href="/admin" className="text-gray-600 hover:text-gray-900 border-l border-gray-300 pl-6">
-                  Admin
-                </Link>
-              )}
-
-              {/* Auth buttons */}
-              <div className="border-l border-gray-300 pl-6">
-                {user ? (
-                  <div className="flex items-center space-x-4">
-                    <span className="text-sm text-gray-600 hidden xl:inline">
-                      {user.name || user.email}
-                      {user.role !== 'regular' && (
-                        <span className="ml-2 px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded">
-                          {user.role}
-                        </span>
-                      )}
-                    </span>
-                    <button
-                      onClick={logout}
-                      className="text-sm text-gray-600 hover:text-gray-900"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex items-center space-x-4">
-                    <Link href="/login" className="text-sm text-gray-600 hover:text-gray-900">
-                      Login
-                    </Link>
+            )}
+            
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center flex-1 justify-between ml-6">
+              {/* Navigation Tabs - Scrollable on smaller desktop */}
+              <div className="flex items-center space-x-1 overflow-x-auto scrollbar-hide flex-1 max-w-4xl">
+                {navLinks.map((link) => {
+                  const isActive = pathname === link.href || 
+                    (link.href !== '/' && pathname.startsWith(link.href))
+                  return (
                     <Link
-                      href="/signup"
-                      className="text-sm bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                      key={link.href}
+                      href={link.href}
+                      className={`px-3 py-2 text-sm font-medium rounded-md whitespace-nowrap transition-colors ${
+                        isActive
+                          ? 'text-blue-700 bg-blue-50 font-semibold'
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                      }`}
+                      aria-current={isActive ? 'page' : undefined}
                     >
-                      Sign Up
+                      {link.label}
                     </Link>
-                  </div>
-                )}
+                  )
+                })}
+              </div>
+
+              {/* Right side: Search */}
+              <div className="flex items-center space-x-4 ml-4 flex-shrink-0">
+                {/* Search Button */}
+                <button
+                  onClick={() => setShowSearch(true)}
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+                  title="Search (⌘K)"
+                >
+                  <Search className="w-4 h-4" />
+                  <span className="hidden xl:inline">Search</span>
+                  <kbd className="hidden lg:inline-flex items-center gap-1 px-1.5 py-0.5 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded">
+                    <span className="text-[10px]">⌘</span>K
+                  </kbd>
+                </button>
               </div>
             </div>
 
             {/* Mobile Navigation */}
-            <div className="flex lg:hidden items-center space-x-2">
+            <div className="flex lg:hidden items-center space-x-2 flex-shrink-0">
               <button
                 onClick={() => setShowSearch(true)}
-                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md"
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label="Search"
               >
                 <Search className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md"
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label="Menu"
               >
                 {mobileMenuOpen ? (
@@ -130,78 +128,26 @@ export function Navigation() {
           {/* Mobile Menu */}
           {mobileMenuOpen && (
             <div className="lg:hidden border-t border-gray-200 py-4">
-              <div className="flex flex-col space-y-2">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                
-                {isPaid && (
-                  <Link
-                    href="/blog"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
-                  >
-                    Blog
-                  </Link>
-                )}
-
-                {isAdmin && (
-                  <Link
-                    href="/admin"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
-                  >
-                    Admin
-                  </Link>
-                )}
-
-                <div className="border-t border-gray-200 pt-2 mt-2">
-                  {user ? (
-                    <div className="px-4 py-2">
-                      <div className="text-sm text-gray-600 mb-2">
-                        {user.name || user.email}
-                        {user.role !== 'regular' && (
-                          <span className="ml-2 px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded">
-                            {user.role}
-                          </span>
-                        )}
-                      </div>
-                      <button
-                        onClick={() => {
-                          logout()
-                          setMobileMenuOpen(false)
-                        }}
-                        className="text-sm text-gray-600 hover:text-gray-900"
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col space-y-2 px-4">
-                      <Link
-                        href="/login"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="text-sm text-gray-600 hover:text-gray-900"
-                      >
-                        Login
-                      </Link>
-                      <Link
-                        href="/signup"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="text-sm bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-center"
-                      >
-                        Sign Up
-                      </Link>
-                    </div>
-                  )}
-                </div>
+              {/* Mobile Navigation Tabs - Horizontal Scroll */}
+              <div className="flex overflow-x-auto scrollbar-hide space-x-2 pb-4">
+                {navLinks.map((link) => {
+                  const isActive = pathname === link.href || 
+                    (link.href !== '/' && pathname.startsWith(link.href))
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`px-4 py-2 text-sm font-medium rounded-md whitespace-nowrap flex-shrink-0 transition-colors ${
+                        isActive
+                          ? 'text-blue-700 bg-blue-50 font-semibold'
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           )}

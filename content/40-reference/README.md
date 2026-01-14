@@ -1,25 +1,60 @@
 # 40. Reference
 
-Architecture and technical reference documentation.
+Architecture and technical reference documentation for Nexus technology stack.
 
 ## Architecture
 
 ### System Overview
 
-Our system follows a modular architecture:
+Our system follows a modular architecture using Nexus technologies:
 
-- **Frontend**: Next.js application
-- **Backend**: API routes and serverless functions
-- **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: NextAuth.js
-- **Deployment**: Vercel
+- **Frontend**: React (Vite) or Next.js applications
+- **Backend**: Java (Spring Boot) or Next.js API routes
+- **Database**: PostgreSQL
+- **Authentication**: Google OAuth
+- **Deployment**: 
+  - Vercel (frontend with BFF pattern)
+  - AWS (full-scale applications)
 
 ### Key Components
 
 - **API Layer**: RESTful API endpoints
-- **Data Layer**: Prisma ORM for database access
-- **Auth Layer**: NextAuth.js for authentication
+- **Data Layer**: 
+  - Prisma ORM (for Node.js/TypeScript projects)
+  - JPA/Hibernate (for Java/Spring Boot projects)
+- **Auth Layer**: Google OAuth + JWT tokens
 - **UI Layer**: React components with Tailwind CSS
+
+### Technology Stack
+
+**Backend Options:**
+1. **Java/Spring Boot** - For enterprise applications
+2. **Next.js API Routes** - For full-stack Next.js apps (BFF pattern)
+
+**Frontend Options:**
+1. **React + Vite** - For client-side applications
+2. **Next.js** - For full-stack applications with SSR/SSG
+
+**Database:**
+- **PostgreSQL** - Primary database for all projects
+
+**Cloud & Deployment:**
+- **Vercel** - Frontend deployment (with BFF pattern)
+- **AWS** - Full-scale application deployment
+
+**Authentication:**
+- **Google OAuth** - Primary authentication method
+
+## Architecture Patterns
+
+See [Architecture Patterns](/40-reference/architecture) for detailed diagrams and reusable patterns:
+
+1. Frontend-Backend Communication
+2. Authentication Flow
+3. Protected Routes Pattern
+4. API Request/Response Flow
+5. Database Connection Pattern
+6. Environment Configuration
 
 ## ADRs (Architecture Decision Records)
 
@@ -61,4 +96,4 @@ Each runbook includes:
 - [Tooling](/30-tooling)
 - [Domains](/domains)
 - [Platform Engineering](/domains/platform-engineering)
-
+- [Architecture Patterns](/40-reference/architecture)

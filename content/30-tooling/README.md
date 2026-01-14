@@ -1,38 +1,61 @@
 # 30. Tooling
 
-Development tools and setup instructions for our Java backend and React frontend stack.
+Development tools and setup instructions for Nexus technology stack.
 
-## Tech Stack
+## Nexus Tech Stack
 
 ### Backend: Java (Spring Boot)
 - **Framework**: Spring Boot 3.x
 - **Build Tool**: Maven or Gradle
 - **Java Version**: Java 17+ (LTS)
-- **Database**: PostgreSQL with Prisma (or JPA/Hibernate)
+- **Database**: PostgreSQL
 - **API Style**: RESTful APIs
+- **ORM**: JPA/Hibernate (or Prisma for Node.js projects)
 
-### Frontend: React
+### Frontend: React + Vite
 - **Framework**: React 18+
-- **Build Tool**: Vite or Create React App
+- **Build Tool**: Vite
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **State Management**: React Context or Zustand
 - **HTTP Client**: Axios or Fetch API
 
+### Full-Stack: Next.js
+- **Framework**: Next.js 14+ (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Deployment**: Vercel (with BFF pattern)
+
+### Database: PostgreSQL
+- **Version**: PostgreSQL 15+
+- **ORM Options**: 
+  - Prisma (for Node.js/TypeScript projects)
+  - JPA/Hibernate (for Java/Spring Boot projects)
+
+### Cloud & Deployment
+- **Frontend**: Vercel (with BFF - Backend for Frontend pattern)
+- **Full-Scale Apps**: AWS (EC2, RDS, S3, CloudFront, etc.)
+- **Authentication**: Google OAuth
+
 ## Local Setup
 
 ### Prerequisites
 
-**Backend (Java)**
+**Backend (Java/Spring Boot)**
 - Java 17+ (JDK)
 - Maven 3.8+ or Gradle 7+
-- PostgreSQL (or Docker for local DB)
+- PostgreSQL 15+ (or Docker for local DB)
 - IDE: IntelliJ IDEA (recommended) or VS Code
 
-**Frontend (React)**
+**Frontend (React/Vite)**
 - Node.js 18+ and npm
 - Git
 - IDE: VS Code (recommended) or IntelliJ IDEA
+
+**Full-Stack (Next.js)**
+- Node.js 18+ and npm
+- PostgreSQL 15+ (or Docker)
+- IDE: VS Code (recommended)
 
 **Shared**
 - Docker (for local services)
@@ -54,9 +77,9 @@ mvn clean install
 # Set up environment variables
 cp .env.example .env
 # Edit .env with your local values:
-# - DATABASE_URL
-# - JWT_SECRET
-# - SERVER_PORT
+# - DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+# - JWT_SECRET=your-secret-key
+# - SERVER_PORT=8080
 
 # Run database migrations
 mvn flyway:migrate
@@ -69,7 +92,7 @@ mvn spring-boot:run
 # Server runs on http://localhost:8080 (default)
 ```
 
-### Frontend Setup (React)
+### Frontend Setup (React/Vite)
 
 ```bash
 # Navigate to frontend directory
@@ -81,176 +104,110 @@ npm install
 # Set up environment variables
 cp .env.example .env
 # Edit .env with your local values:
-# - REACT_APP_API_URL=http://localhost:8080/api
-# - REACT_APP_ENV=development
+# - VITE_API_URL=http://localhost:8080/api
+# - VITE_GOOGLE_CLIENT_ID=your-google-client-id
 
 # Start development server
-npm start
-# Or: npm run dev (if using Vite)
+npm run dev
 
-# Server runs on http://localhost:3000 (default)
+# Server runs on http://localhost:5173 (Vite default)
+```
+
+### Full-Stack Setup (Next.js)
+
+```bash
+# Navigate to Next.js project directory
+cd <project-directory>
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your local values:
+# - DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+# - JWT_SECRET=your-secret-key
+# - GOOGLE_CLIENT_ID=your-google-client-id
+
+# Generate Prisma Client (if using Prisma)
+npx prisma generate
+
+# Run database migrations
+npx prisma migrate dev
+
+# Start development server
+npm run dev
+
+# Server runs on http://localhost:3000 (Next.js default)
 ```
 
 ### Full Stack Development
 
 ```bash
-# Terminal 1: Start backend
+# Terminal 1: Start backend (Java/Spring Boot)
 cd backend
 mvn spring-boot:run
 
-# Terminal 2: Start frontend
+# Terminal 2: Start frontend (React/Vite)
 cd frontend
-npm start
+npm run dev
 
-# Backend API: http://localhost:8080/api
-# Frontend App: http://localhost:3000
+# Or for Next.js full-stack:
+cd nextjs-app
+npm run dev
 ```
 
 ## Test Commands
 
-### Backend (Java)
-
+### Java/Spring Boot
 ```bash
 # Run all tests
 mvn test
-# Or: ./gradlew test
 
-# Run tests with coverage
+# Run with coverage
 mvn test jacoco:report
-# Or: ./gradlew test jacocoTestReport
 
 # Run specific test class
 mvn test -Dtest=UserServiceTest
-
-# Run integration tests
-mvn verify
-# Or: ./gradlew integrationTest
-
-# Check code quality
-mvn sonar:sonar
 ```
 
-### Frontend (React)
-
+### React/Vite
 ```bash
-# Run all tests
+# Run tests
 npm test
 
+# Run tests with coverage
+npm run test:coverage
+
 # Run tests in watch mode
-npm test -- --watch
+npm run test:watch
+```
+
+### Next.js
+```bash
+# Run tests
+npm test
 
 # Run tests with coverage
-npm test -- --coverage
-
-# Run E2E tests (Playwright/Cypress)
-npm run test:e2e
-
-# Run linting
-npm run lint
-
-# Fix linting issues
-npm run lint:fix
-
-# Type checking (TypeScript)
-npm run type-check
-```
-
-## Development Tools
-
-### Backend Tools
-
-**IDE Setup (IntelliJ IDEA)**
-- Install Spring Boot plugin
-- Configure code style (Google Java Style Guide)
-- Enable annotation processing
-- Set up run configurations for Spring Boot apps
-
-**Essential Plugins**
-- Lombok (reduce boilerplate)
-- MapStruct (object mapping)
-- Spring Assistant
-- SonarLint (code quality)
-
-**Database Tools**
-- DBeaver or pgAdmin (PostgreSQL)
-- Flyway or Liquibase (migrations)
-- Prisma Studio (if using Prisma)
-
-### Frontend Tools
-
-**IDE Setup (VS Code)**
-- ESLint extension
-- Prettier extension
-- React snippets
-- Tailwind CSS IntelliSense
-
-**Essential Extensions**
-- ESLint
-- Prettier
-- React Developer Tools (browser)
-- Redux DevTools (if using Redux)
-
-## Build Commands
-
-### Backend
-
-```bash
-# Build JAR file
-mvn clean package
-# Output: target/app.jar
-
-# Run JAR
-java -jar target/app.jar
-
-# Build Docker image
-docker build -t backend:latest .
-
-# Run with Docker
-docker run -p 8080:8080 backend:latest
-```
-
-### Frontend
-
-```bash
-# Production build
-npm run build
-
-# Build output in: build/ or dist/
-
-# Preview production build
-npm run preview
-
-# Build Docker image
-docker build -t frontend:latest .
-
-# Run with Docker
-docker run -p 3000:3000 frontend:latest
+npm run test:coverage
 ```
 
 ## CI Overview
 
-Our CI pipeline runs on every push and pull request:
+### Vercel (Frontend/Next.js)
+- Automatic deployments on push to main
+- Preview deployments for pull requests
+- Zero-configuration setup
+- Built-in CI/CD
 
-1. **Linting**: Check code style and quality
-2. **Type Checking**: Verify TypeScript types
-3. **Unit Tests**: Run all unit tests
-4. **Integration Tests**: Run integration tests
-5. **Build**: Verify the project builds
-6. **E2E Tests**: Run end-to-end tests (on main branch)
-
-### CI Commands
-
-The CI uses the same commands as local development:
-
-- `npm run lint`
-- `npm run type-check`
-- `npm test`
-- `npm run build`
-- `npm run test:e2e`
+### AWS (Full-Scale Apps)
+- GitHub Actions for CI/CD
+- Automated testing before deployment
+- Staging and production environments
+- Infrastructure as Code (Terraform/CloudFormation)
 
 ## Related
 
-- [Workflows](/20-workflows)
-- [Reference](/40-reference)
-- [Domains](/domains)
-
+- [Local Setup Guide](./database.md)
+- [Architecture Reference](/40-reference/architecture)
+- [Deployment Strategy](/domains/platform-engineering/implementation/deployment-strategy)

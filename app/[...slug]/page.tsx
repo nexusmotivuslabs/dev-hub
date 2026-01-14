@@ -38,15 +38,13 @@ export default async function MarkdownPage({ params }: PageProps) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <article className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8">
-        <div className="prose prose-sm sm:prose-base lg:prose-lg max-w-none">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {content.content}
-          </ReactMarkdown>
-        </div>
-      </article>
-    </div>
+    <article className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8 w-full max-w-none">
+      <div className="prose prose-sm sm:prose-base lg:prose-lg max-w-none w-full">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {content.content}
+        </ReactMarkdown>
+      </div>
+    </article>
   )
 }
 
